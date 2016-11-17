@@ -22,7 +22,7 @@ namespace Snake_Game
             {
                 case Keys.Left:
                 case Keys.A:
-                    Console.WriteLine("LEFT");
+                    //Console.WriteLine("LEFT");
                     if (snake.CurrentDirection == Direction.DOWN || snake.CurrentDirection == Direction.UP)
                     {
                         snake.Move(Direction.LEFT);
@@ -30,7 +30,7 @@ namespace Snake_Game
                     break;
                 case Keys.Up:
                 case Keys.W:
-                    Console.WriteLine("UP");
+                    //Console.WriteLine("UP");
                     if (snake.CurrentDirection == Direction.LEFT || snake.CurrentDirection == Direction.RIGHT)
                     {
                         snake.Move(Direction.UP);
@@ -38,7 +38,7 @@ namespace Snake_Game
                     break;
                 case Keys.Right:
                 case Keys.D:
-                    Console.WriteLine("RIGHT");
+                    //Console.WriteLine("RIGHT");
                     if (snake.CurrentDirection == Direction.DOWN || snake.CurrentDirection == Direction.UP)
                     {
                         snake.Move(Direction.RIGHT);
@@ -46,7 +46,7 @@ namespace Snake_Game
                     break;
                 case Keys.Down:
                 case Keys.S:
-                    Console.WriteLine("DOWN");
+                    //Console.WriteLine("DOWN");
                     if (snake.CurrentDirection == Direction.LEFT || snake.CurrentDirection == Direction.RIGHT)
                     {
                         snake.Move(Direction.DOWN);

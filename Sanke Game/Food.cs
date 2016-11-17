@@ -13,7 +13,6 @@ namespace Snake_Game
         public Point Location { get; private set; }
         public List<Point> Foods { get; private set; }
 
-
         public Food(Point location, Grid grid)
         {
             Eaten = false;

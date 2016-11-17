@@ -32,6 +32,7 @@ namespace Snake_Game
             {
                 newDirection = CurrentDirection;
             }
+
             switch (newDirection)
             {
                 case Direction.UP:
@@ -55,27 +56,6 @@ namespace Snake_Game
                     CurrentDirection = newDirection;
                     break;
             }
-        }
-
-        public void Eat(Direction Direction)
-        {
-            switch (Direction)
-            {
-                case Direction.UP:
-                    grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X, snakeBody.First.Value.Y - 10));
-                    break;
-                case Direction.RIGHT:
-                    grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X + 10, snakeBody.First.Value.Y));
-                    break;
-                case Direction.DOWN:
-                    grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X, snakeBody.First.Value.Y + 10));
-                    break;
-                case Direction.LEFT:
-                    grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X - 10, snakeBody.First.Value.Y));
-                    break;
-            }
-            length++;
-            MessageSender(length);
         }
 
         public void MoveLoop(Direction newDirection, Form1 form)
@@ -99,6 +79,27 @@ namespace Snake_Game
                     grid.SnakeBody.RemoveLast();
                     break;
             }
+        }
+
+        public void Eat(Direction Direction)
+        {
+            switch (Direction)
+            {
+                case Direction.UP:
+                    grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X, snakeBody.First.Value.Y - 10));
+                    break;
+                case Direction.RIGHT:
+                    grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X + 10, snakeBody.First.Value.Y));
+                    break;
+                case Direction.DOWN:
+                    grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X, snakeBody.First.Value.Y + 10));
+                    break;
+                case Direction.LEFT:
+                    grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X - 10, snakeBody.First.Value.Y));
+                    break;
+            }
+            length++;
+            MessageSender(length);
         }
     }
 }

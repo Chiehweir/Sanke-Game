@@ -130,17 +130,21 @@ namespace Snake_Game
 
         #endregion
 
-
         #region Update screen
+
+        /// <summary>
+        /// 回调显示length到记分板
+        /// </summary>
+        /// <param name="length"></param>
 
         public void RunFrame(object sender, EventArgs e)
         {
             arena.Invalidate(); //call arena_Paint()
 
             if (loopToolStripMenuItem.Checked)
-                grid.Go(this, true);
+                grid.GoLoop(this);
             else
-                grid.Go(this, false);
+                grid.Go(this);
         }
 
         private void arena_Paint(object sender, PaintEventArgs e)
@@ -215,21 +219,21 @@ namespace Snake_Game
             //MessageBox.Show(e.Location.ToString());
         }
 
-        private void ShowGrid(Graphics g)
-        {
-            //arena.backcolor = color.silver;
-            //using (pen pen = new pen(color.black))
-            //{
-            //    for (int x = 0; x < 800; x += 10)
-            //    {
-            //        g.drawline(pen, x, 0, x, 600);
-            //    }
-            //    for (int y = 0; y < 800; y += 10)
-            //    {
-            //        g.drawline(pen, 0, y, 800, y);
-            //    }
-            //}
-        }
+        //private void ShowGrid(Graphics g)
+        //{
+        //    arena.BackColor = Color.Silver;
+        //    using (Pen pen = new Pen(Color.Black))
+        //    {
+        //        for (int x = 0; x< 800; x += 10)
+        //        {
+        //            g.DrawLine(pen, x, 0, x, 600);
+        //        }
+        //        for (int y = 0; y< 800; y += 10)
+        //        {
+        //            g.DrawLine(pen, 0, y, 800, y);
+        //        }
+        //    }
+        //}
 
         #endregion
 

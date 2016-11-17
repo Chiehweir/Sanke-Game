@@ -33,30 +33,14 @@ namespace Snake_Game
             CreateFood();
         }
 
-        public void Go(Form1 form)
+        public void Go(Form1 form, bool loop)
         {
-            // 测试代码
-            Console.WriteLine("Head " + SnakeBody.First.Value);
-            foreach (var food in Foods)
+            if (HitTheWall())
             {
-                Console.WriteLine("Food " + food.Location);
-            }
-            //
-
-            if (!IsKnot())
-            {
-                if (!HitTheWall())
+                if (loop)
                 {
-                    if (IsNeighbor())
-                    {
-                        Snake.Eat(Snake.CurrentDirection);
-                        CreateFood();
-                        Snake.Move(Snake.CurrentDirection);
-                    }
-                    else
-                    {
-                        Snake.Move(Snake.CurrentDirection);
-                    }
+                    Console.WriteLine("loop!");
+                    Snake.MoveLoop(Snake.CurrentDirection, form);
                 }
                 else
                 {
@@ -64,40 +48,22 @@ namespace Snake_Game
                     form.EndOfTurn("You hit the wall");
                 }
             }
-            else
-            {
-                Console.WriteLine("knot!");
-                form.EndOfTurn("You eat yourself!");
-            }
-        }
 
-        public void GoLoop(Form1 form)
-        {
-            if (!IsKnot())
-            {
-                if (!HitTheWall())
-                {
-                    if (IsNeighbor())
-                    {
-                        Snake.Eat(Snake.CurrentDirection);
-                        CreateFood();
-                        Snake.Move(Snake.CurrentDirection);
-                    }
-                    else
-                    {
-                        Snake.Move(Snake.CurrentDirection);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("loop!");
-                    Snake.MoveLoop(Snake.CurrentDirection, form);
-                }
-            }
-            else
+            if (IsKnot())
             {
                 Console.WriteLine("knot!");
                 form.EndOfTurn("You eat yourself!");
+            }
+
+            if (IsNeighbor())
+            {
+                Snake.Eat(Snake.CurrentDirection);
+                CreateFood();
+                Snake.Move(Snake.CurrentDirection);
+            }
+            else
+            {
+                Snake.Move(Snake.CurrentDirection);
             }
         }
 
@@ -118,22 +84,15 @@ namespace Snake_Game
 
         private bool HitTheWall()
         {
-            if (SnakeBody.First.Value.X == - 10 || SnakeBody.First.Value.X == arenaSize.Width)
+            if (SnakeBody.First.Value.X == -10 || SnakeBody.First.Value.X == arenaSize.Width ||
+                SnakeBody.First.Value.Y == -10 || SnakeBody.First.Value.Y == arenaSize.Height)
             {
                 return true;
             }
             else
             {
-                if (SnakeBody.First.Value.Y == - 10 || SnakeBody.First.Value.Y == arenaSize.Height)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return false;
             }
-
         }
 
         private bool IsKnot()
@@ -157,7 +116,7 @@ namespace Snake_Game
                 Foods.RemoveAt(0);
 
             Console.WriteLine();
-            Console.WriteLine("Food " + location);
+            //Console.WriteLine("Food " + location);
         }
 
         private void CreateSnake()
