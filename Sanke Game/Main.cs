@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace Snake_Game
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
         private Grid grid;
         private string level;
         private DateTime start = DateTime.Now;
         private DateTime end;
 
-        public Form1()
+        public Main()
         {
             InitializeComponent();
 
@@ -31,6 +31,10 @@ namespace Snake_Game
 
         #region Initialization
 
+        /// <summary>
+        /// Reset game,
+        /// add timer tick event
+        /// </summary>
         private void Initialize()
         {
             
@@ -130,21 +134,17 @@ namespace Snake_Game
 
         #endregion
 
-        #region Update screen
 
-        /// <summary>
-        /// 回调显示length到记分板
-        /// </summary>
-        /// <param name="length"></param>
+        #region Update screen
 
         public void RunFrame(object sender, EventArgs e)
         {
             arena.Invalidate(); //call arena_Paint()
 
             if (loopToolStripMenuItem.Checked)
-                grid.GoLoop(this);
+                grid.Go(this, true);
             else
-                grid.Go(this);
+                grid.Go(this, false);
         }
 
         private void arena_Paint(object sender, PaintEventArgs e)
@@ -216,24 +216,24 @@ namespace Snake_Game
 
         private void arena_MouseClick_1(object sender, MouseEventArgs e)
         {
-            //MessageBox.Show(e.Location.ToString());
+            MessageBox.Show(e.Location.ToString());
         }
 
-        //private void ShowGrid(Graphics g)
-        //{
-        //    arena.BackColor = Color.Silver;
-        //    using (Pen pen = new Pen(Color.Black))
-        //    {
-        //        for (int x = 0; x< 800; x += 10)
-        //        {
-        //            g.DrawLine(pen, x, 0, x, 600);
-        //        }
-        //        for (int y = 0; y< 800; y += 10)
-        //        {
-        //            g.DrawLine(pen, 0, y, 800, y);
-        //        }
-        //    }
-        //}
+        private void ShowGrid(Graphics g)
+        {
+            //arena.backcolor = color.silver;
+            //using (pen pen = new pen(color.black))
+            //{
+            //    for (int x = 0; x < 800; x += 10)
+            //    {
+            //        g.drawline(pen, x, 0, x, 600);
+            //    }
+            //    for (int y = 0; y < 800; y += 10)
+            //    {
+            //        g.drawline(pen, 0, y, 800, y);
+            //    }
+            //}
+        }
 
         #endregion
 

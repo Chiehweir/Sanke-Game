@@ -14,7 +14,7 @@ namespace Snake_Game
 
         public Renderer Renderer;
         public Snake Snake { get; private set; }
-        public Food Food { get; private set; }
+        public Food Food { get; private set; } // 补充食物种类
         public LinkedList<Point> SnakeBody { get; private set; }
         public List<Food> Foods { get; private set; }
         public Controller Controller { get; private set; }
@@ -33,14 +33,14 @@ namespace Snake_Game
             CreateFood();
         }
 
-        public void Go(Form1 form, bool loop)
+        public void Go(Main form, bool loop)
         {
             if (HitTheWall())
             {
                 if (loop)
                 {
                     Console.WriteLine("loop!");
-                    Snake.MoveLoop(Snake.CurrentDirection, form);
+                    Snake.Move(Snake.CurrentDirection, true);
                 }
                 else
                 {
@@ -59,18 +59,18 @@ namespace Snake_Game
             {
                 Snake.Eat(Snake.CurrentDirection);
                 CreateFood();
-                Snake.Move(Snake.CurrentDirection);
             }
-            else
-            {
-                Snake.Move(Snake.CurrentDirection);
-            }
+
+            Snake.Move(Snake.CurrentDirection);
+            Console.WriteLine("Head " + SnakeBody.First.Value);
         }
 
         private bool IsNeighbor()
         {
             foreach (var food in Foods)
             {
+                Console.WriteLine();
+                Console.WriteLine("Food " + food.Location);
                 if (SnakeBody.First.Value == food.Location)
                 {
                     Console.WriteLine("eat!");
@@ -78,7 +78,6 @@ namespace Snake_Game
                     return true;
                 }
             }
-            
             return false;
         }
 
@@ -90,9 +89,7 @@ namespace Snake_Game
                 return true;
             }
             else
-            {
                 return false;
-            }
         }
 
         private bool IsKnot()
@@ -100,9 +97,7 @@ namespace Snake_Game
             for (int i = 1; i < SnakeBody.Count; i++)
             {
                 if (SnakeBody.ElementAt(i) == SnakeBody.First.Value)
-                {
                     return true;
-                }
             }
             return false;
         }
@@ -112,11 +107,8 @@ namespace Snake_Game
             Point location = new Point(random.Next(0, arenaSize.Width) / 10 * 10, random.Next(0, arenaSize.Height) / 10 * 10);
             Food newfood = new Food(location, this);
             Foods.Add(newfood);
-            if (Foods.Count > 1)
-                Foods.RemoveAt(0);
+            if (Foods.Count > 1) Foods.RemoveAt(0);
 
-            Console.WriteLine();
-            //Console.WriteLine("Food " + location);
         }
 
         private void CreateSnake()

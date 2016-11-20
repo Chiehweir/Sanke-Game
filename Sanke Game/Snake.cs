@@ -26,61 +26,45 @@ namespace Snake_Game
             CurrentDirection = Direction.RIGHT;
         }
 
-        public void Move(Direction newDirection)
+        public void Move(Direction newDirection, bool isLoop = false)
         {
-            if (newDirection == CurrentDirection)
-            {
-                newDirection = CurrentDirection;
-            }
-
             switch (newDirection)
             {
                 case Direction.UP:
-                    grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X, snakeBody.First.Value.Y - 10));
+                    if(isLoop)
+                        grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X, 650 - 10));
+                    else
+                        grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X, snakeBody.First.Value.Y - 10));
                     grid.SnakeBody.RemoveLast();
                     CurrentDirection = newDirection;
                     break;
                 case Direction.RIGHT:
-                    grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X + 10, snakeBody.First.Value.Y));
+                    if(isLoop)
+                        grid.SnakeBody.AddFirst(new Point(10, snakeBody.First.Value.Y));
+                    else
+                        grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X + 10, snakeBody.First.Value.Y));
                     grid.SnakeBody.RemoveLast();
                     CurrentDirection = newDirection;
                     break;
                 case Direction.DOWN:
-                    grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X, snakeBody.First.Value.Y + 10));
+                    if(isLoop)
+                        grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X, 10));
+                    else
+                        grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X, snakeBody.First.Value.Y + 10));
                     grid.SnakeBody.RemoveLast();
                     CurrentDirection = newDirection;
                     break;
                 case Direction.LEFT:
-                    grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X - 10, snakeBody.First.Value.Y));
+                    if(isLoop)
+                        grid.SnakeBody.AddFirst(new Point(830 - 10, snakeBody.First.Value.Y));
+                    else
+                        grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X - 10, snakeBody.First.Value.Y));
                     grid.SnakeBody.RemoveLast();
                     CurrentDirection = newDirection;
                     break;
             }
         }
-
-        public void MoveLoop(Direction newDirection, Form1 form)
-        {
-            switch (newDirection)
-            {
-                case Direction.UP:
-                    grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X, form.arena.Height - 10));
-                    grid.SnakeBody.RemoveLast();
-                    break;
-                case Direction.RIGHT:
-                    grid.SnakeBody.AddFirst(new Point(10, snakeBody.First.Value.Y));
-                    grid.SnakeBody.RemoveLast();
-                    break;
-                case Direction.DOWN:
-                    grid.SnakeBody.AddFirst(new Point(snakeBody.First.Value.X, 10));
-                    grid.SnakeBody.RemoveLast();
-                    break;
-                case Direction.LEFT:
-                    grid.SnakeBody.AddFirst(new Point(form.arena.Width - 10, snakeBody.First.Value.Y));
-                    grid.SnakeBody.RemoveLast();
-                    break;
-            }
-        }
-
+        
         public void Eat(Direction Direction)
         {
             switch (Direction)
