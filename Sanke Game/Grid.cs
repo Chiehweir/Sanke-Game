@@ -104,11 +104,13 @@ namespace Snake_Game
 
         private void CreateFood()
         {
-            Point location = new Point(random.Next(0, arenaSize.Width) / 10 * 10, random.Next(0, arenaSize.Height) / 10 * 10);
+            Point location = new Point(random.Next(arenaSize.Width) / 10 * 10, random.Next(arenaSize.Height) / 10 * 10);
             Food newfood = new Food(location, this);
             Foods.Add(newfood);
-            if (Foods.Count > 1) Foods.RemoveAt(0);
 
+            // 场上不止一种食物？
+            if (Foods.Count > 1)
+                Foods.RemoveAt(0);
         }
 
         private void CreateSnake()

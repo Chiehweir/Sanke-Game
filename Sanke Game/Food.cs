@@ -9,6 +9,7 @@ namespace Snake_Game
 {
     public class Food
     {
+        public int weight { get; private set; }
         public bool Eaten { get; set; }
         public Point Location { get; private set; }
         public List<Point> Foods { get; private set; }
